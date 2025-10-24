@@ -31,7 +31,6 @@ namespace PragueParking2._0.Models
             double hours = Math.Ceiling(duration.TotalHours); //Avrundar uppåt till närmaste timme
             return hours * ratePerHour;
         }
-
         public override string ToString()
         {
             return $"{Type} {RegNumber} (Incheckad: {CheckInTime}";
