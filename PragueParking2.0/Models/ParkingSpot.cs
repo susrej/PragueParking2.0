@@ -1,9 +1,13 @@
-﻿using System;
+﻿using PragueParking2._0.DataAccess;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.Design;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+
+
+
 
 namespace PragueParking2._0.Models
 {
@@ -49,9 +53,51 @@ namespace PragueParking2._0.Models
                     return false;
             }
             return false;
-            }
-            
-
-            }
         }
-   
+
+        public bool Park(Vehicle v)
+        {
+            //kollar om fordonet kan parkeras på platsen
+            if (!IsAvailable(v))
+                return false;
+
+            //Lägger till fordon i listan med parkerade fordon
+            ParkedVehicles.Add(v);
+            return true;
+        }
+
+        //Checka ut fordon
+        public string CheckOut(string regNumber, Config config)
+        {
+            Vehicle foundVehicle = null;
+
+            //Gå igenom parkerade fordon, letar efter regNummer
+            foreach (var vehicle in ParkedVehicles)
+            {
+                if (vehicle.RegNumber == regNumber)
+                {
+                    foundVehicle = vehicle;
+                    break;
+                }
+            }
+            //om fordonet inte hittas skrivs felmeddelande ut
+            if (foundVehicle == null)
+                return "Kunde inte hitta fordon";
+
+            TimeSpan duration = DateTime.Now - foundVehicle.CheckInTime;
+
+            double parkingFee = foundVehicle.CalculateCost(
+                config.FreeMinutes,
+                foundVehicle is Car ? 
+                config.CarRatePerHour : config.MCRatePerHour
+            );
+
+            string message = $"Fordon:{foundVehicle.Type} {foundVehicle.RegNumber} checkade ut.\n" +
+                             $"Typ: \nParkeringstid: {duration.Hours:F1} {duration.Minutes:F1} min\n" +
+                             $"Avgift: {parkingFee:F2} CZK";
+            return message;
+        }
+
+    }
+}
+
