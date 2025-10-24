@@ -14,6 +14,8 @@ namespace PragueParking2._0.DataAccess
         public double CarRatePerHour { get; set; } = 20;
         public double MCRatePerHour { get; set; } = 10;
 
+        public int TotalParkingSpots { get; set; } = 100;
+
         private const string ConfigFile = "config.json";
 
         public Config() { }
@@ -35,8 +37,8 @@ namespace PragueParking2._0.DataAccess
             }
         }
 
-        //sparar konfigurationen till fil
-        public void Save()
+//sparar konfigurationen till fil
+public void Save()
         {
             var json = JsonSerializer.Serialize(this, new JsonSerializerOptions { WriteIndented = true });
             File.WriteAllText(ConfigFile, json);

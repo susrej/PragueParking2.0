@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace PragueParking2._0.Models
 {
-    internal class Garage
+    public class Garage
     {
+
     }
 }
