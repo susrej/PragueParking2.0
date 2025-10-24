@@ -6,9 +6,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-
-
-
 namespace PragueParking2._0.Models
 {
     public class ParkingSpot
@@ -16,6 +13,7 @@ namespace PragueParking2._0.Models
         public int SpotNumber { get; set; }
         public List<Vehicle> ParkedVehicles { get; set; } = new List<Vehicle>();
 
+        //Kontrollera om platsen är ledig för fordonstypen
         public bool IsAvailable(Vehicle v)
         {
             if (v is Car) //om input är av typen BIL
@@ -55,9 +53,10 @@ namespace PragueParking2._0.Models
             return false;
         }
 
+        //Kontrollera om platsen är ledig och parkerar fordonet
         public bool Park(Vehicle v)
         {
-            //kollar om fordonet kan parkeras på platsen
+
             if (!IsAvailable(v))
                 return false;
 
@@ -88,7 +87,7 @@ namespace PragueParking2._0.Models
 
             double parkingFee = foundVehicle.CalculateCost(
                 config.FreeMinutes,
-                foundVehicle is Car ? 
+                foundVehicle is Car ?
                 config.CarRatePerHour : config.MCRatePerHour
             );
 
@@ -100,4 +99,3 @@ namespace PragueParking2._0.Models
 
     }
 }
-

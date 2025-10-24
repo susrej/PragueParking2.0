@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace PragueParking2._0.Models
 {
     public class Garage
-    {
+    { }
 
-    }
+    
 }
