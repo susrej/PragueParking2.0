@@ -35,7 +35,7 @@ namespace PragueParking2._0.UI
                     .Color(Color.DarkOrange));
 
                 //Huvudmeny
-                var panel = new Panel("\[white]Huvudmeny[/]")
+                var panel = new Panel("[white]Huvudmeny[/]")
                     .RoundedBorder()
                     .BorderColor(Color.DarkOrange);
                 AnsiConsole.Write(panel);
@@ -87,7 +87,6 @@ namespace PragueParking2._0.UI
             else
                 AnsiConsole.MarkupLine("[red] Ingen ledig plats för detta fordon.[/]");
         }
-
         public void CheckOutMenu()
         {
             string regNumber = AnsiConsole.Ask<string>("Ange registreringsnummer på fordonet som ska checkas ut: ");

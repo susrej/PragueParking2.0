@@ -12,4 +12,10 @@
     <PackageReference Include="Spectre.Console" Version="0.53.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Compile Update="DataAccess\Config.cs">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Compile>
+  </ItemGroup>
+
 </Project>

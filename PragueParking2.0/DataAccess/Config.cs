@@ -15,11 +15,13 @@ namespace PragueParking2._0.DataAccess
         public double MCRatePerHour { get; set; } = 10;
         public int TotalParkingSpots { get; set; } = 100;
 
-        private const string ConfigFile = "config.json";
+        private static readonly string ConfigFile = Path.Combine(
+            AppDomain.CurrentDomain.BaseDirectory, "config.json"); // ändrar så att det alltid går att hitta filen oavsett varifrån den startas
 
         //Läser in konfiguration från fil, skapar en ny om fil saknas
         public static Config Load()
         {
+
             //kontrollerar om configfilen finns
             if (File.Exists(ConfigFile))
             {
@@ -34,8 +36,8 @@ namespace PragueParking2._0.DataAccess
             }
         }
 
-//sparar konfigurationen till fil
-public void Save()
+        //sparar konfigurationen till fil
+        public void Save()
         {
             var json = JsonSerializer.Serialize(this, new JsonSerializerOptions { WriteIndented = true });
             File.WriteAllText(ConfigFile, json);
