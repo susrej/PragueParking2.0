@@ -26,7 +26,9 @@ namespace PragueParking2._0.Models
         public double CalculateCost(int freeMinutes, double ratePerHour)
         {
             TimeSpan duration = DateTime.Now - CheckInTime;
-            if (duration.TotalMinutes > freeMinutes)
+
+            double totalMinutes = duration.TotalMinutes - freeMinutes;
+            if (totalMinutes <=0)
                 return 0;
 
             double hours = Math.Ceiling(duration.TotalHours); //Avrundar uppåt till närmaste timme

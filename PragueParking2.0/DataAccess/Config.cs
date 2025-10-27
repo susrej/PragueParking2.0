@@ -13,12 +13,9 @@ namespace PragueParking2._0.DataAccess
         public int FreeMinutes { get; set; } = 10;
         public double CarRatePerHour { get; set; } = 20;
         public double MCRatePerHour { get; set; } = 10;
-
         public int TotalParkingSpots { get; set; } = 100;
 
         private const string ConfigFile = "config.json";
-
-        public Config() { }
 
         //Läser in konfiguration från fil, skapar en ny om fil saknas
         public static Config Load()

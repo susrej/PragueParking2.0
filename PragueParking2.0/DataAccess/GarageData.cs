@@ -9,16 +9,25 @@ using PragueParking2._0.Models;
 namespace PragueParking2._0.DataAccess
 {
     public class GarageData
+
     {
         private const string GarageFile = "garageData.json";
 
-        public static Garage Load()
+        public static Garage Load(Config config)
         {
             //kontrollera om garagefilen finns
             if (File.Exists(GarageFile))
             {
                 var json = File.ReadAllText(GarageFile);
-                return JsonSerializer.Deserialize<Garage>(json) ?? new Garage();
+                var garage = JsonSerializer.Deserialize<Garage>(json);
+
+                //om filen finns men Spots är null eller tom
+                if (garage == null || garage.Spots == null || garage.Spots.Count == 0)
+                {
+                    garage = new Garage(config);
+                    Save(garage);
+                }
+                return garage;
             }
             else //annars skapas en ny garagefil
             {

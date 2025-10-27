@@ -8,94 +8,122 @@ using System.Threading.Tasks;
 
 namespace PragueParking2._0.Models
 {
+    //    public class ParkingSpot
+    //    {
+    //        public int SpotNumber { get; set; }
+    //        public List<Vehicle> ParkedVehicles { get; set; } = new List<Vehicle>();
+
+    //        // Kolla om platsen är ledig för fordonet
+    //        //public bool IsAvailable(Vehicle vehicle, Config config)
+    //        //{
+    //        //    if (ParkedVehicles == null)
+    //        //        ParkedVehicles = new List<Vehicle>();
+
+    //        //    if (vehicle is Car)
+    //        //    {
+    //        //        // Om det redan finns en bil, platsen upptagen
+    //        //        foreach (var v in ParkedVehicles)
+    //        //        {
+    //        //            if (v is Car)
+    //        //            {
+    //        //                return false;
+    //        //            }
+    //        //        }
+    //        //        return true;// plats ledig för bil
+    //        //    }
+
+    //        //    else if (vehicle is MC)
+    //        //    {
+    //        //        int mcCount = 0;
+    //        //        foreach (var v in ParkedVehicles)
+    //        //        {
+    //        //            if (v is Car) return false; // MC kan ej stå med bil
+    //        //            if (v is MC) mcCount++;
+    //        //        }
+
+    //        //        if (mcCount < 2)
+    //        //        {
+    //        //            return true; // plats ledig för MC
+    //        //        }
+    //        //        else
+    //        //        {
+    //        //            return false; // plats full för MC
+    //        //        }
+    //        //    }
+
+    //        //    return false; // om det är någon annan typ av fordon
+    //        //}
+
+    //        public bool IsAvailable(Vehicle vehicle, Config config)
+    //        {
+    //            if (ParkedVehicles == null)
+    //                ParkedVehicles = new List<Vehicle>(); // säkerställ att listan inte är null
+
+    //            if (vehicle is Car)
+    //            {
+    //                // Om det finns någon bil på platsen är platsen upptagen
+    //                for (int i = 0; i < ParkedVehicles.Count; i++)
+    //                {
+    //                    if (ParkedVehicles[i] is Car)
+    //                        return false; // platsen upptagen
+    //                }
+    //                return true; // ledig för bil
+    //            }
+    //            else if (vehicle is MC)
+    //            {
+    //                int mcCount = 0;
+
+    //                for (int i = 0; i < ParkedVehicles.Count; i++)
+    //                {
+    //                    if (ParkedVehicles[i] is Car)
+    //                        return false; // MC kan inte stå med bil
+
+    //                    if (ParkedVehicles[i] is MC)
+    //                        mcCount++;
+    //                }
+
+    //                if (mcCount < 2)
+    //                    return true; // max 2 MC per plats
+    //                else
+    //                    return false; // platsen full
+    //            }
+
+    //            return false; // okänd fordonstyp
+    //        }
+    //    }
+    //}
     public class ParkingSpot
     {
         public int SpotNumber { get; set; }
         public List<Vehicle> ParkedVehicles { get; set; } = new List<Vehicle>();
 
-        //Kontrollera om platsen är ledig för fordonstypen
-        public bool IsAvailable(Vehicle v)
+        // Kontrollera om platsen är ledig för fordonet
+        public bool IsAvailable(Vehicle vehicle, Config config)
         {
-            if (v is Car) //om input är av typen BIL
-
-            //kolla om det finns en bil på platsen
+            if (vehicle is Car)
             {
-                foreach (var vehicle in ParkedVehicles)
+                // Platsen är upptagen om det finns en bil
+                foreach (var v in ParkedVehicles)
                 {
-                    if (vehicle is Car)
-                    {
-                        return false; //platsen upptagen
-                    }
-                    return true; // ledig för bild
+                    if (v is Car)
+                        return false;
                 }
+                return true; // ledig för bil
             }
-            else if (v is MC)
+            else if (vehicle is MC)
             {
-                int mcCount = 0; //räknare för att hålla koll på hur många MC som redan står parkerade på platsen
-
-                foreach (var vehicle in ParkedVehicles)
+                int mcCount = 0;
+                foreach (var v in ParkedVehicles)
                 {
-                    if (vehicle is Car)
-                    {
-                        return false; //platsen upptagen av en bil
-                    }
-                    if (vehicle is MC)
-                    {
-                        mcCount++; //ökar MC med 1 för att ta reda på hur många MC som står där
-                    }
-                    return true; // ledig för bild
+                    if (v is Car)
+                        return false; // MC kan ej stå med bil
+                    if (v is MC)
+                        mcCount++;
                 }
-                if (mcCount < 2)
-                    return true; //om det står mindra än 2 MC på platsen finns en ledig plats för MC
-                else
-                    return false;
+                return mcCount < 2; // max 2 MC per plats
             }
+
             return false;
         }
-
-        //Kontrollera om platsen är ledig och parkerar fordonet
-        public bool Park(Vehicle v)
-        {
-
-            if (!IsAvailable(v))
-                return false;
-
-            //Lägger till fordon i listan med parkerade fordon
-            ParkedVehicles.Add(v);
-            return true;
-        }
-
-        //Checka ut fordon
-        public string CheckOut(string regNumber, Config config)
-        {
-            Vehicle foundVehicle = null;
-
-            //Gå igenom parkerade fordon, letar efter regNummer
-            foreach (var vehicle in ParkedVehicles)
-            {
-                if (vehicle.RegNumber == regNumber)
-                {
-                    foundVehicle = vehicle;
-                    break;
-                }
-            }
-            //om fordonet inte hittas skrivs felmeddelande ut
-            if (foundVehicle == null)
-                return "Kunde inte hitta fordon";
-
-            TimeSpan duration = DateTime.Now - foundVehicle.CheckInTime;
-
-            double parkingFee = foundVehicle.CalculateCost(
-                config.FreeMinutes,
-                foundVehicle is Car ?
-                config.CarRatePerHour : config.MCRatePerHour
-            );
-
-            string message = $"Fordon:{foundVehicle.Type} {foundVehicle.RegNumber} checkade ut.\n" +
-                             $"Typ: \nParkeringstid: {duration.Hours:F1} {duration.Minutes:F1} min\n" +
-                             $"Avgift: {parkingFee:F2} CZK";
-            return message;
-        }
-
     }
 }
