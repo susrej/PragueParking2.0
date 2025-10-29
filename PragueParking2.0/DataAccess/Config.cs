@@ -15,8 +15,9 @@ namespace PragueParking2._0.DataAccess
         public double MCRatePerHour { get; set; } = 10;
         public int TotalParkingSpots { get; set; } = 100;
 
+        // ändrar så att det alltid går att hitta filen oavsett varifrån den startas
         private static readonly string ConfigFile = Path.Combine(
-            AppDomain.CurrentDomain.BaseDirectory, "config.json"); // ändrar så att det alltid går att hitta filen oavsett varifrån den startas
+            AppDomain.CurrentDomain.BaseDirectory, "../../../config.json"); 
 
         //Läser in konfiguration från fil, skapar en ny om fil saknas
         public static Config Load()

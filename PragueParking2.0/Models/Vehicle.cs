@@ -16,16 +16,13 @@ namespace PragueParking2._0.Models
         public string Type { get; set; }
         public DateTime CheckInTime { get; set; }
         public int Size { get; set; }
-
         public Vehicle() { }
-
         public Vehicle(string regNumber, string type)
         {
             RegNumber = regNumber;
             Type = type;
             CheckInTime = DateTime.Now;
         }
-
         //Beräkna parkeringsavgift
         public double CalculateCost(int freeMinutes, double ratePerHour)
         {

@@ -11,7 +11,10 @@ namespace PragueParking2._0.DataAccess
     public class GarageData
 
     {
-        private const string GarageFile = "garageData.json";
+        //ändrar till detta för att kunna hitta filen oavsett varifrån den startas
+        private static readonly string GarageFile = Path.Combine(
+            AppDomain.CurrentDomain.BaseDirectory, "../../../garageData.json");
+        //private const string GarageFile = "garageData.json";
 
         public static Garage Load(Config config)
         {

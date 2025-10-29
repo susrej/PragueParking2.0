@@ -12,7 +12,6 @@ using System.Runtime.CompilerServices;
 
 namespace PragueParking2._0.UI
 {
-
     public class UserInterface
     {
         private Garage garage;
@@ -33,12 +32,6 @@ namespace PragueParking2._0.UI
                     new FigletText("Prague Parking")
                     .Centered()
                     .Color(Color.DarkOrange));
-
-                //Huvudmeny
-                var panel = new Panel("[white]Huvudmeny[/]")
-                    .RoundedBorder()
-                    .BorderColor(Color.DarkOrange);
-                AnsiConsole.Write(panel);
 
                 var choice = AnsiConsole.Prompt(
                     new SelectionPrompt<string>()
@@ -64,50 +57,111 @@ namespace PragueParking2._0.UI
                         break;
                     case "Visa garage":
                         ShowGarage(garage);
-                        
+
                         break;
                     case "Avsluta":
                         running = false;
                         break;
                 }
-                AnsiConsole.MarkupLine("\nTryck på valfri tangent för att fortsätta...");
-                Console.ReadKey();
+                //AnsiConsole.MarkupLine("\nTryck på valfri tangent för att fortsätta...");
+                //Console.ReadKey();
             }
         }
 
         public void ParkVehicleMenu()
         {
             AnsiConsole.Clear();
+            AnsiConsole.Write(
+                new FigletText("Prague Parking")
+                .Centered()
+                .Color(Color.White));
             var type = AnsiConsole.Prompt(
                 new SelectionPrompt<string>()
-                .Title("\tVälj fordonstyp:")
-                .AddChoices(new[] { "Bil", "MC" }));
+                .Title("Välj ett alternativ:")
+                .AddChoices(new[] { "Bil", "MC", "Tillbaka till huvudmenyn" }));
+
+            if (type == "Tillbaka till huvudmenyn") { return; }
 
             string regNumber = AnsiConsole.Ask<string>("Ange registreringsnummer: ");
 
             Vehicle vehicle = type == "Bil" ? new Car(regNumber) : new MC(regNumber);
 
             int spotNumber = garage.ParkVehicle(vehicle, config); //få platsnummer på parkeringen
-
+            if (spotNumber == -2)
+            {
+                AnsiConsole.MarkupLine("[red]Fordon med detta registreringsnummer är redan parkerad.[/]");
+                AnsiConsole.MarkupLine("\nTryck på valfri tangent för att återgå till huvudmenyn...");
+                Console.ReadKey();
+                return;
+            }
             if (spotNumber != -1) //om fordonet parkerades 
                 AnsiConsole.MarkupLine($"[green]{vehicle.Type} {vehicle.RegNumber} parkerades på plats [bold]{spotNumber}[/][/]");
             else
                 AnsiConsole.MarkupLine("[red] Ingen ledig plats för detta fordon.[/]");
+            AnsiConsole.MarkupLine("\nTryck på valfri tangent för att återgå till huvudmenyn...");
+            Console.ReadKey();
         }
 
         public void MoveVehicleMenu()
         {
-            string regNumber = AnsiConsole.Ask<string>("Ange registreringsnummer på fordonet som ska flyttas: ");
+            AnsiConsole.Clear();
+            AnsiConsole.Write(
+                new FigletText("Prague Parking")
+                .Centered()
+                .Color(Color.White));
+            var choice = AnsiConsole.Prompt(
+            new SelectionPrompt<string>()
+                .Title("Välj ett alternativ:")
+                .AddChoices(new[] { "Flytta fordon", "Tillbaka till huvudmenyn" }));
+
+            if (choice == "Tillbaka till huvudmenyn")
+                return;
+            ShowOnlyParkedVehicles(garage);
+            string regNumber = AnsiConsole.Ask<string>("\nAnge registreringsnummer på fordonet som ska flyttas: ");
             int newSpot = AnsiConsole.Ask<int>("Ange ny parkeringsplats: ");
-            garage.MoveVehicle(regNumber, newSpot, config);
+
+            bool result = garage.MoveVehicle(regNumber, newSpot, config, out string message);
+
+            if (result)
+                AnsiConsole.MarkupLine($"[green]{message}[/]");
+            else
+                AnsiConsole.MarkupLine($"[red]{message}[/]");
+            AnsiConsole.MarkupLine("\nTryck på valfri tangent för att återgå till huvudmenyn...");
+            Console.ReadKey();
         }
 
         public void CheckOutMenu()
         {
-            string regNumber = AnsiConsole.Ask<string>("Ange registreringsnummer på fordonet som ska checkas ut: ");
+            AnsiConsole.Clear();
+            AnsiConsole.Write(
+                new FigletText("Prague Parking")
+                .Centered()
+                .Color(Color.White));
+
+            var choice = AnsiConsole.Prompt(
+                new SelectionPrompt<string>()
+             .Title("Välj ett alternativ:")
+             .AddChoices(new[] { "Checka ut fordon", "Tillbaka till huvudmenyn" }));
+
+            if (choice == "Tillbaka till huvudmenyn")
+                return;
+
+            if (garage == null)
+            {
+                AnsiConsole.MarkupLine("Inga fordon parkerade");
+                AnsiConsole.MarkupLine("Tryck på valfri tangent för att återgå till huvudmenyn");
+                Console.ReadKey();
+            }
+
+            ShowOnlyParkedVehicles(garage);
+            string regNumber = AnsiConsole.Ask<string>("\nAnge registreringsnummer på fordonet som ska checkas ut: ");
+
             string message = garage.CheckOut(regNumber, config);
 
             AnsiConsole.Markup($"\n[white]{message}[/]");
+            AnsiConsole.MarkupLine("\nTryck på valfri tangent för att återgå till huvudmenyn...");
+            Console.ReadKey();
+            
         }
 
         public void ShowOnlyParkedVehicles(Garage garage)
@@ -133,13 +187,14 @@ namespace PragueParking2._0.UI
                         table.AddRow(
                             spot.SpotNumber.ToString(),
                             $"[{color}]{vehicle.Type}[/]",
-                            $"[{color}]{vehicle.RegNumber}[/]",
+                            $"[{color}]{vehicle.RegNumber.ToUpper()}[/]",
                             $"[{color}]{vehicle.CheckInTime: yyyy-MM-dd HH:mm}[/]");
                     }
                 }
             }
             AnsiConsole.Write(table.Centered());
-            AnsiConsole.WriteLine();
+
+           
         }
         public void ShowGarage(Garage garage)
         {
@@ -151,6 +206,12 @@ namespace PragueParking2._0.UI
 
             AnsiConsole.WriteLine();
 
+            if (garage == null)
+            {
+                AnsiConsole.MarkupLine("Inga fordon parkerade");
+                AnsiConsole.MarkupLine("Tryck på valfri tangent för att återgå till huvudmenyn");
+                Console.ReadKey();
+            }
             var table = new Table();
 
             table.AddColumn("P-plats");
@@ -173,19 +234,24 @@ namespace PragueParking2._0.UI
                     var types = string.Join(" | ", spot.ParkedVehicles.Select(v => v.Type).Distinct());
                     var regNumbers = string.Join(" | ", spot.ParkedVehicles.Select(v => v.RegNumber));
                     var checkInTimes = string.Join(" | ", spot.ParkedVehicles.Select(v => v.CheckInTime.ToString("yyyy-MM-dd HH:mm")));
-                    
+
                     var mcCount = spot.ParkedVehicles.Count(v => v is MC);
                     var color = spot.ParkedVehicles.Any(v => v is Car) || mcCount == 2 ? "red" : "yellow";
                     table.AddRow(
                         spot.SpotNumber.ToString(),
                         $"[{color}]{types}[/]",
-                        $"[{color}]{regNumbers}[/]",
+                        $"[{color}]{regNumbers.ToUpper()}[/]",
                         $"[{color}]{checkInTimes}[/]");
                 }
             }
             AnsiConsole.Write(table.Centered());
+
+
             AnsiConsole.WriteLine();
+            AnsiConsole.MarkupLine("\nTryck på valfri tangent för att återgå till huvudmenyn...");
+            Console.ReadKey();
 
         }
     }
+
 }

@@ -16,7 +16,6 @@ namespace PragueParking2._0.Models
     public class Garage
     {
         public List<ParkingSpot> Spots { get; set; } = new List<ParkingSpot>();
-
         public Garage() { }
         public Garage(Config config)
         {
@@ -32,11 +31,24 @@ namespace PragueParking2._0.Models
         }
 
         //Kontrollera om platsen är ledig och parkerar fordonet
-        public int ParkVehicle(Vehicle vehicle, Config config) //ändrar till int från bool då den returnerar ett värde
+        public int ParkVehicle(Vehicle vehicle, Config config)
         {
+            //kontrollera om regnummer redan finns
+            foreach (var spot in Spots)
+            {
+                foreach (var parkedVehicle in spot.ParkedVehicles)
+                {
+                    if (parkedVehicle.RegNumber == vehicle.RegNumber)
+                    {
+                        return -2;
+
+                    }
+                }
+            }
 
             foreach (var spot in Spots)
             {
+
                 if (spot.IsAvailable(vehicle, config))
                 {
                     vehicle.CheckInTime = DateTime.Now;
@@ -50,50 +62,40 @@ namespace PragueParking2._0.Models
 
         }
 
-        public bool MoveVehicle(string regNumber, int targetSpotNumber, Config config)
+        public bool MoveVehicle(string regNumber, int targetSpotNumber, Config config, out string message)
         {
             Vehicle vehicleToMove = null;
             ParkingSpot currentSpot = null;
 
+            // 1. Hitta fordonet
             foreach (var spot in Spots)
             {
-                foreach (var vehicle in spot.ParkedVehicles)
-                {
-                    if (vehicle.RegNumber == regNumber)
-                    {
-                        vehicleToMove = vehicle;
-                        currentSpot = spot;
-                        break;
-                    }
-                }
+                vehicleToMove = spot.ParkedVehicles.FirstOrDefault(v => v.RegNumber == regNumber);
                 if (vehicleToMove != null)
+                {
+                    currentSpot = spot;
                     break;
+                }
             }
+
             if (vehicleToMove == null)
             {
-                Console.WriteLine($"Fordon med regnummer {regNumber} hittades inte.");
+                message = $"Fordon med regnummer {regNumber.ToUpper()} hittades inte.";
                 return false;
-            } // 2. Hitta målet
-
-            ParkingSpot targetSpot = null;
-            foreach (var spot in Spots)
-            {
-                if (spot.SpotNumber == targetSpotNumber)
-                {
-                    targetSpot = spot;
-                    break;
-                }
             }
+
+            // 2. Hitta målet
+            var targetSpot = Spots.FirstOrDefault(s => s.SpotNumber == targetSpotNumber);
             if (targetSpot == null)
             {
-                Console.WriteLine($"Plats {targetSpotNumber} finns inte.");
+                message = $"Plats {targetSpotNumber} finns inte.";
                 return false;
             }
 
             // 3. Kontrollera om platsen är tillgänglig
             if (!targetSpot.IsAvailable(vehicleToMove, config))
             {
-                Console.WriteLine($"Plats {targetSpotNumber} är inte ledig för detta fordon.");
+                message = $"Plats {targetSpotNumber} är inte ledig för detta fordon.";
                 return false;
             }
 
@@ -101,48 +103,47 @@ namespace PragueParking2._0.Models
             currentSpot.ParkedVehicles.Remove(vehicleToMove);
             targetSpot.ParkedVehicles.Add(vehicleToMove);
 
-            Console.WriteLine($"Fordon {regNumber} flyttat till plats {targetSpotNumber}.");
             GarageData.Save(this);
+
+            message = $"Fordon {regNumber.ToUpper()} flyttad till plats {targetSpotNumber}.";
             return true;
         }
-
-        //Checka ut fordon
         public string CheckOut(string regNumber, Config config)
-{
-    Vehicle foundVehicle = null;
-    ParkingSpot foundSpot = null;
-
-    foreach (var spot in Spots)
-    {
-        foreach (var vehicle in spot.ParkedVehicles)
         {
-            if (vehicle.RegNumber == regNumber)
+            Vehicle foundVehicle = null;
+            ParkingSpot foundSpot = null;
+
+            foreach (var spot in Spots)
             {
-                foundVehicle = vehicle;
-                foundSpot = spot;
-                break;
+                foreach (var vehicle in spot.ParkedVehicles)
+                {
+                    if (vehicle.RegNumber == regNumber)
+                    {
+                        foundVehicle = vehicle;
+                        foundSpot = spot;
+                        break;
+                    }
+                }
+                if (foundVehicle != null) break;
             }
+
+            if (foundVehicle == null)
+                return "Kunde inte hitta fordon";
+
+            foundSpot.ParkedVehicles.Remove(foundVehicle);
+
+            TimeSpan duration = DateTime.Now - foundVehicle.CheckInTime;
+
+            double ratePerHour = foundVehicle is Car ? config.CarRatePerHour : config.MCRatePerHour;
+            double parkingFee = foundVehicle.CalculateCost(config.FreeMinutes, ratePerHour);
+
+            GarageData.Save(this);
+
+            string message = $"{foundVehicle.Type}: \t\t[bold yellow]{foundVehicle.RegNumber.ToUpper()}[/] checkades ut.\n" +
+                             $"Parkeringstid: \t[bold yellow]{duration.Hours}h {duration.Minutes} min[/]\n" +
+                             $"Avgift: \t[bold yellow]{parkingFee:F2}[/] CZK\n";
+            return message;
         }
-        if (foundVehicle != null) break;
-    }
-
-    if (foundVehicle == null)
-        return "Kunde inte hitta fordon";
-
-    foundSpot.ParkedVehicles.Remove(foundVehicle);
-
-    TimeSpan duration = DateTime.Now - foundVehicle.CheckInTime;
-
-    double ratePerHour = foundVehicle is Car ? config.CarRatePerHour : config.MCRatePerHour;
-    double parkingFee = foundVehicle.CalculateCost(config.FreeMinutes, ratePerHour);
-
-    GarageData.Save(this);
-
-    string message = $"Fordon: {foundVehicle.Type} {foundVehicle.RegNumber} checkade ut.\n" +
-                     $"Parkeringstid: {duration.Hours}h {duration.Minutes} min\n" +
-                     $"Avgift: {parkingFee:F2} CZK";
-    return message;
-}
     }
 
 }

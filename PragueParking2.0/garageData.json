@@ -1,0 +1,504 @@
+{
+  "Spots": [
+    {
+      "SpotNumber": 1,
+      "MaxSize": 2,
+      "ParkedVehicles": []
+    },
+    {
+      "SpotNumber": 2,
+      "MaxSize": 2,
+      "ParkedVehicles": []
+    },
+    {
+      "SpotNumber": 3,
+      "MaxSize": 2,
+      "ParkedVehicles": []
+    },
+    {
+      "SpotNumber": 4,
+      "MaxSize": 2,
+      "ParkedVehicles": []
+    },
+    {
+      "SpotNumber": 5,
+      "MaxSize": 2,
+      "ParkedVehicles": []
+    },
+    {
+      "SpotNumber": 6,
+      "MaxSize": 2,
+      "ParkedVehicles": []
+    },
+    {
+      "SpotNumber": 7,
+      "MaxSize": 2,
+      "ParkedVehicles": []
+    },
+    {
+      "SpotNumber": 8,
+      "MaxSize": 2,
+      "ParkedVehicles": []
+    },
+    {
+      "SpotNumber": 9,
+      "MaxSize": 2,
+      "ParkedVehicles": []
+    },
+    {
+      "SpotNumber": 10,
+      "MaxSize": 2,
+      "ParkedVehicles": []
+    },
+    {
+      "SpotNumber": 11,
+      "MaxSize": 2,
+      "ParkedVehicles": []
+    },
+    {
+      "SpotNumber": 12,
+      "MaxSize": 2,
+      "ParkedVehicles": []
+    },
+    {
+      "SpotNumber": 13,
+      "MaxSize": 2,
+      "ParkedVehicles": []
+    },
+    {
+      "SpotNumber": 14,
+      "MaxSize": 2,
+      "ParkedVehicles": []
+    },
+    {
+      "SpotNumber": 15,
+      "MaxSize": 2,
+      "ParkedVehicles": []
+    },
+    {
+      "SpotNumber": 16,
+      "MaxSize": 2,
+      "ParkedVehicles": []
+    },
+    {
+      "SpotNumber": 17,
+      "MaxSize": 2,
+      "ParkedVehicles": []
+    },
+    {
+      "SpotNumber": 18,
+      "MaxSize": 2,
+      "ParkedVehicles": []
+    },
+    {
+      "SpotNumber": 19,
+      "MaxSize": 2,
+      "ParkedVehicles": []
+    },
+    {
+      "SpotNumber": 20,
+      "MaxSize": 2,
+      "ParkedVehicles": []
+    },
+    {
+      "SpotNumber": 21,
+      "MaxSize": 2,
+      "ParkedVehicles": []
+    },
+    {
+      "SpotNumber": 22,
+      "MaxSize": 2,
+      "ParkedVehicles": []
+    },
+    {
+      "SpotNumber": 23,
+      "MaxSize": 2,
+      "ParkedVehicles": []
+    },
+    {
+      "SpotNumber": 24,
+      "MaxSize": 2,
+      "ParkedVehicles": []
+    },
+    {
+      "SpotNumber": 25,
+      "MaxSize": 2,
+      "ParkedVehicles": []
+    },
+    {
+      "SpotNumber": 26,
+      "MaxSize": 2,
+      "ParkedVehicles": []
+    },
+    {
+      "SpotNumber": 27,
+      "MaxSize": 2,
+      "ParkedVehicles": []
+    },
+    {
+      "SpotNumber": 28,
+      "MaxSize": 2,
+      "ParkedVehicles": []
+    },
+    {
+      "SpotNumber": 29,
+      "MaxSize": 2,
+      "ParkedVehicles": []
+    },
+    {
+      "SpotNumber": 30,
+      "MaxSize": 2,
+      "ParkedVehicles": []
+    },
+    {
+      "SpotNumber": 31,
+      "MaxSize": 2,
+      "ParkedVehicles": []
+    },
+    {
+      "SpotNumber": 32,
+      "MaxSize": 2,
+      "ParkedVehicles": []
+    },
+    {
+      "SpotNumber": 33,
+      "MaxSize": 2,
+      "ParkedVehicles": []
+    },
+    {
+      "SpotNumber": 34,
+      "MaxSize": 2,
+      "ParkedVehicles": []
+    },
+    {
+      "SpotNumber": 35,
+      "MaxSize": 2,
+      "ParkedVehicles": []
+    },
+    {
+      "SpotNumber": 36,
+      "MaxSize": 2,
+      "ParkedVehicles": []
+    },
+    {
+      "SpotNumber": 37,
+      "MaxSize": 2,
+      "ParkedVehicles": []
+    },
+    {
+      "SpotNumber": 38,
+      "MaxSize": 2,
+      "ParkedVehicles": []
+    },
+    {
+      "SpotNumber": 39,
+      "MaxSize": 2,
+      "ParkedVehicles": []
+    },
+    {
+      "SpotNumber": 40,
+      "MaxSize": 2,
+      "ParkedVehicles": []
+    },
+    {
+      "SpotNumber": 41,
+      "MaxSize": 2,
+      "ParkedVehicles": []
+    },
+    {
+      "SpotNumber": 42,
+      "MaxSize": 2,
+      "ParkedVehicles": []
+    },
+    {
+      "SpotNumber": 43,
+      "MaxSize": 2,
+      "ParkedVehicles": []
+    },
+    {
+      "SpotNumber": 44,
+      "MaxSize": 2,
+      "ParkedVehicles": []
+    },
+    {
+      "SpotNumber": 45,
+      "MaxSize": 2,
+      "ParkedVehicles": []
+    },
+    {
+      "SpotNumber": 46,
+      "MaxSize": 2,
+      "ParkedVehicles": []
+    },
+    {
+      "SpotNumber": 47,
+      "MaxSize": 2,
+      "ParkedVehicles": []
+    },
+    {
+      "SpotNumber": 48,
+      "MaxSize": 2,
+      "ParkedVehicles": []
+    },
+    {
+      "SpotNumber": 49,
+      "MaxSize": 2,
+      "ParkedVehicles": []
+    },
+    {
+      "SpotNumber": 50,
+      "MaxSize": 2,
+      "ParkedVehicles": []
+    },
+    {
+      "SpotNumber": 51,
+      "MaxSize": 2,
+      "ParkedVehicles": []
+    },
+    {
+      "SpotNumber": 52,
+      "MaxSize": 2,
+      "ParkedVehicles": []
+    },
+    {
+      "SpotNumber": 53,
+      "MaxSize": 2,
+      "ParkedVehicles": []
+    },
+    {
+      "SpotNumber": 54,
+      "MaxSize": 2,
+      "ParkedVehicles": []
+    },
+    {
+      "SpotNumber": 55,
+      "MaxSize": 2,
+      "ParkedVehicles": []
+    },
+    {
+      "SpotNumber": 56,
+      "MaxSize": 2,
+      "ParkedVehicles": []
+    },
+    {
+      "SpotNumber": 57,
+      "MaxSize": 2,
+      "ParkedVehicles": []
+    },
+    {
+      "SpotNumber": 58,
+      "MaxSize": 2,
+      "ParkedVehicles": []
+    },
+    {
+      "SpotNumber": 59,
+      "MaxSize": 2,
+      "ParkedVehicles": []
+    },
+    {
+      "SpotNumber": 60,
+      "MaxSize": 2,
+      "ParkedVehicles": []
+    },
+    {
+      "SpotNumber": 61,
+      "MaxSize": 2,
+      "ParkedVehicles": []
+    },
+    {
+      "SpotNumber": 62,
+      "MaxSize": 2,
+      "ParkedVehicles": []
+    },
+    {
+      "SpotNumber": 63,
+      "MaxSize": 2,
+      "ParkedVehicles": []
+    },
+    {
+      "SpotNumber": 64,
+      "MaxSize": 2,
+      "ParkedVehicles": []
+    },
+    {
+      "SpotNumber": 65,
+      "MaxSize": 2,
+      "ParkedVehicles": []
+    },
+    {
+      "SpotNumber": 66,
+      "MaxSize": 2,
+      "ParkedVehicles": []
+    },
+    {
+      "SpotNumber": 67,
+      "MaxSize": 2,
+      "ParkedVehicles": []
+    },
+    {
+      "SpotNumber": 68,
+      "MaxSize": 2,
+      "ParkedVehicles": []
+    },
+    {
+      "SpotNumber": 69,
+      "MaxSize": 2,
+      "ParkedVehicles": []
+    },
+    {
+      "SpotNumber": 70,
+      "MaxSize": 2,
+      "ParkedVehicles": []
+    },
+    {
+      "SpotNumber": 71,
+      "MaxSize": 2,
+      "ParkedVehicles": []
+    },
+    {
+      "SpotNumber": 72,
+      "MaxSize": 2,
+      "ParkedVehicles": []
+    },
+    {
+      "SpotNumber": 73,
+      "MaxSize": 2,
+      "ParkedVehicles": []
+    },
+    {
+      "SpotNumber": 74,
+      "MaxSize": 2,
+      "ParkedVehicles": []
+    },
+    {
+      "SpotNumber": 75,
+      "MaxSize": 2,
+      "ParkedVehicles": []
+    },
+    {
+      "SpotNumber": 76,
+      "MaxSize": 2,
+      "ParkedVehicles": []
+    },
+    {
+      "SpotNumber": 77,
+      "MaxSize": 2,
+      "ParkedVehicles": []
+    },
+    {
+      "SpotNumber": 78,
+      "MaxSize": 2,
+      "ParkedVehicles": []
+    },
+    {
+      "SpotNumber": 79,
+      "MaxSize": 2,
+      "ParkedVehicles": []
+    },
+    {
+      "SpotNumber": 80,
+      "MaxSize": 2,
+      "ParkedVehicles": []
+    },
+    {
+      "SpotNumber": 81,
+      "MaxSize": 2,
+      "ParkedVehicles": []
+    },
+    {
+      "SpotNumber": 82,
+      "MaxSize": 2,
+      "ParkedVehicles": []
+    },
+    {
+      "SpotNumber": 83,
+      "MaxSize": 2,
+      "ParkedVehicles": []
+    },
+    {
+      "SpotNumber": 84,
+      "MaxSize": 2,
+      "ParkedVehicles": []
+    },
+    {
+      "SpotNumber": 85,
+      "MaxSize": 2,
+      "ParkedVehicles": []
+    },
+    {
+      "SpotNumber": 86,
+      "MaxSize": 2,
+      "ParkedVehicles": []
+    },
+    {
+      "SpotNumber": 87,
+      "MaxSize": 2,
+      "ParkedVehicles": []
+    },
+    {
+      "SpotNumber": 88,
+      "MaxSize": 2,
+      "ParkedVehicles": []
+    },
+    {
+      "SpotNumber": 89,
+      "MaxSize": 2,
+      "ParkedVehicles": []
+    },
+    {
+      "SpotNumber": 90,
+      "MaxSize": 2,
+      "ParkedVehicles": []
+    },
+    {
+      "SpotNumber": 91,
+      "MaxSize": 2,
+      "ParkedVehicles": []
+    },
+    {
+      "SpotNumber": 92,
+      "MaxSize": 2,
+      "ParkedVehicles": []
+    },
+    {
+      "SpotNumber": 93,
+      "MaxSize": 2,
+      "ParkedVehicles": []
+    },
+    {
+      "SpotNumber": 94,
+      "MaxSize": 2,
+      "ParkedVehicles": []
+    },
+    {
+      "SpotNumber": 95,
+      "MaxSize": 2,
+      "ParkedVehicles": []
+    },
+    {
+      "SpotNumber": 96,
+      "MaxSize": 2,
+      "ParkedVehicles": []
+    },
+    {
+      "SpotNumber": 97,
+      "MaxSize": 2,
+      "ParkedVehicles": []
+    },
+    {
+      "SpotNumber": 98,
+      "MaxSize": 2,
+      "ParkedVehicles": []
+    },
+    {
+      "SpotNumber": 99,
+      "MaxSize": 2,
+      "ParkedVehicles": []
+    },
+    {
+      "SpotNumber": 100,
+      "MaxSize": 2,
+      "ParkedVehicles": []
+    }
+  ]
+}
