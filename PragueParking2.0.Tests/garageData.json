@@ -1,0 +1,22 @@
+{
+  "Spots": [
+    {
+      "SpotNumber": 1,
+      "MaxSize": 2,
+      "ParkedVehicles": [
+        {
+          "$type": "Car",
+          "RegNumber": "ABC123",
+          "Type": "Bil",
+          "CheckInTime": "2025-10-29T14:36:49.8957141+01:00",
+          "Size": 2
+        }
+      ]
+    },
+    {
+      "SpotNumber": 2,
+      "MaxSize": 2,
+      "ParkedVehicles": []
+    }
+  ]
+}

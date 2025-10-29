@@ -63,8 +63,6 @@ namespace PragueParking2._0.UI
                         running = false;
                         break;
                 }
-                //AnsiConsole.MarkupLine("\nTryck på valfri tangent för att fortsätta...");
-                //Console.ReadKey();
             }
         }
 
