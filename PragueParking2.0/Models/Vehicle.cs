@@ -3,15 +3,19 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace PragueParking2._0.Models
 {
+    [JsonDerivedType(typeof(Car), typeDiscriminator: "Car")] // Tala om för JSON att "Car" är en möjlig typ
+    [JsonDerivedType(typeof(MC), typeDiscriminator: "MC")]   // Tala om för JSON att "MC" är en möjlig typ
     public class Vehicle
     {
         public string RegNumber { get; set; }
         public string Type { get; set; }
         public DateTime CheckInTime { get; set; }
+        public int Size { get; set; }
 
         public Vehicle() { }
 

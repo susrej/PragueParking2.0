@@ -21,7 +21,7 @@ namespace PragueParking2._0.DataAccess
                 var json = File.ReadAllText(GarageFile);
                 var garage = JsonSerializer.Deserialize<Garage>(json);
 
-                //om filen finns men Spots är null eller tom
+                //om filen finns men Spots är null eller tom 
                 if (garage == null || garage.Spots == null || garage.Spots.Count == 0)
                 {
                     garage = new Garage(config);
@@ -31,7 +31,7 @@ namespace PragueParking2._0.DataAccess
             }
             else //annars skapas en ny garagefil
             {
-                var garage = new Garage();
+                var garage = new Garage(config);
                 Save(garage);
                 return garage;
             }

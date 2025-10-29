@@ -9,6 +9,6 @@ namespace PragueParking2._0.Models
 {
     public class MC : Vehicle
     {
-        public MC(string regNumber) : base(regNumber, "MC") { }
+        public MC(string regNumber) : base(regNumber, "MC") { Size = 1; }
     }
 }
