@@ -33,6 +33,8 @@ namespace PragueParking2._0.UI
                     .Centered()
                     .Color(Color.DarkOrange));
 
+                ShowPriceList();
+
                 var choice = AnsiConsole.Prompt(
                     new SelectionPrompt<string>()
                     .AddChoices(new[] {
@@ -249,6 +251,25 @@ namespace PragueParking2._0.UI
             AnsiConsole.MarkupLine("\nTryck på valfri tangent för att återgå till huvudmenyn...");
             Console.ReadKey();
 
+        }
+
+        public void ShowPriceList()
+        {
+            var table = new Table();
+            
+            table.AddColumn("Fordonstyp");
+            table.AddColumn("Pris per timme");
+           
+            table.AddRow($"[red]Bil[/]", $"[red]20 CZK[/]");
+            table.AddRow($"[yellow]MC[/]", $"[yellow]15 CZK[/]");
+            AnsiConsole.WriteLine();
+            table.AddRow($"[green]Första {config.FreeMinutes} minuter [/]", "[green]Fri parkering[/]");
+
+            AnsiConsole.Write(table.Centered());
+
+            AnsiConsole.WriteLine();
+            //AnsiConsole.MarkupLine("\nTryck på valfri tangent för att återgå till huvudmenyn...");
+            //Console.ReadKey();
         }
     }
 
