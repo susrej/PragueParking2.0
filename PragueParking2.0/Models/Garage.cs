@@ -117,7 +117,7 @@ namespace PragueParking2._0.Models
             {
                 foreach (var vehicle in spot.ParkedVehicles)
                 {
-                    if (vehicle.RegNumber == regNumber)
+                    if (vehicle.RegNumber.ToUpper() == regNumber.ToUpper())
                     {
                         foundVehicle = vehicle;
                         foundSpot = spot;
@@ -140,7 +140,7 @@ namespace PragueParking2._0.Models
             GarageData.Save(this);
 
             string message = $"{foundVehicle.Type}: \t\t[bold yellow]{foundVehicle.RegNumber.ToUpper()}[/] checkades ut.\n" +
-                             $"Parkeringstid: \t[bold yellow]{duration.Hours}h {duration.Minutes} min[/]\n" +
+                             $"Parkeringstid: \t[bold yellow]{duration.Hours}h {duration.Minutes}[/] min\n" +
                              $"Avgift: \t[bold yellow]{parkingFee:F2}[/] CZK\n";
             return message;
         }
