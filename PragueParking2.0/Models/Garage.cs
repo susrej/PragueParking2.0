@@ -38,7 +38,7 @@ namespace PragueParking2._0.Models
             {
                 foreach (var parkedVehicle in spot.ParkedVehicles)
                 {
-                    if (parkedVehicle.RegNumber == vehicle.RegNumber)
+                    if (parkedVehicle.RegNumber.ToUpper() == vehicle.RegNumber.ToUpper())
                     {
                         return -2;
 

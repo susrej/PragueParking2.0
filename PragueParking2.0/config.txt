@@ -1,0 +1,6 @@
+# Prague Parking konfiguration
+# Ändra värdena nedan och spara filen
+FreeMinutes = 10
+CarRatePerHour = 20
+MCRatePerHour = 10
+TotalParkingSpots = 100

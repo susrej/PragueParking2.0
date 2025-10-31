@@ -55,7 +55,7 @@ namespace PragueParking2._0.UI
                     Header = new PanelHeader("[hotpink2]Parkeringsstatus[/]"),
                     Width = 43,
                     Border = BoxBorder.Rounded,
-                    
+
                     Padding = new Padding(4, 1, 1, 1)
                 };
                 infoPanel.BorderStyle = new Style(Color.MistyRose3);
@@ -69,6 +69,7 @@ namespace PragueParking2._0.UI
                     "Checka ut fordon",
                     "Incheckade fordon",
                     "Parkeringsöversikt",
+                    "Uppdatera priser",
                     "Avsluta" };
 
                 int selectedIndex = 0;
@@ -138,6 +139,9 @@ namespace PragueParking2._0.UI
                     case "Parkeringsöversikt":
                         ParkingOverviewMatrix(garage, config);
                         break;
+                    case "Uppdatera priser":
+                        UpdatePriceList();
+                        break;
                     case "Avsluta":
                         running = false;
                         break;
@@ -204,14 +208,38 @@ namespace PragueParking2._0.UI
             {
                 case "Registrera bil":
                 case "Registrera MC":
-                    string regNumber = AnsiConsole.Ask<string>("Ange registreringsnummer: ");
+                    string regNumber;
+
+                    AnsiConsole.Clear();
+                    AnsiConsole.Write(
+          new FigletText("Prague Parking")
+          .Centered()
+          .Color(Color.HotPink2));
+                    regNumber = AnsiConsole.Prompt(new TextPrompt<string>("Ange registreringsnummer: ".Trim())
+                        .AllowEmpty()
+                        .Validate(input =>
+                        {
+                            input = input.Trim();
+                            if (string.IsNullOrWhiteSpace(input))
+                            {
+                                return ValidationResult.Error("[indianred1_1]\n\nRegistreringsnummer får inte vara tomt![/]");
+
+                            }
+                            if (input.Length < 1 || input.Length > 10)
+                            {
+                                return ValidationResult.Error("[indianred1_1]\n\nOgiltigt registreringsnummer.[/]");
+                            }
+                            return ValidationResult.Success();     // default case
+
+                        }));
+
 
                     Vehicle vehicle = menuChoices[selectedIndex] == "Registrera bil" ? new Car(regNumber) : new MC(regNumber);
 
                     int spotNumber = garage.ParkVehicle(vehicle, config); //få platsnummer på parkeringen
                     if (spotNumber == -2)
                     {
-                        AnsiConsole.MarkupLine("[red]Fordon med detta registreringsnummer är redan parkerad.[/]");
+                        AnsiConsole.MarkupLine("[indianred1_1]Fordon med detta registreringsnummer är redan parkerad.[/]");
                         AnsiConsole.MarkupLine("\nTryck på valfri tangent för att återgå till huvudmenyn...");
                         Console.ReadKey();
                         return;
@@ -219,9 +247,10 @@ namespace PragueParking2._0.UI
                     if (spotNumber != -1) //om fordonet parkerades 
                         AnsiConsole.MarkupLine($"[palegreen3_1]{vehicle.Type} {vehicle.RegNumber.ToUpper()} parkerades på plats [bold]{spotNumber}[/][/]");
                     else
-                        AnsiConsole.MarkupLine("[red] Ingen ledig plats för detta fordon.[/]");
+                        AnsiConsole.MarkupLine("[indianred1_1] Ingen ledig plats för detta fordon.[/]");
                     AnsiConsole.MarkupLine("\nTryck på valfri tangent för att återgå till huvudmenyn...");
                     Console.ReadKey();
+
                     break;
                 case "Avsluta":
                     break;
@@ -291,7 +320,7 @@ namespace PragueParking2._0.UI
                     if (result)
                         AnsiConsole.MarkupLine($"[palegreen3_1]{message}[/]");
                     else
-                        AnsiConsole.MarkupLine($"[red]{message}[/]");
+                        AnsiConsole.MarkupLine($"[indianred1_1]{message}[/]");
                     AnsiConsole.MarkupLine("\nTryck på valfri tangent för att återgå till huvudmenyn...");
                     Console.ReadKey();
                     break;
@@ -403,20 +432,20 @@ namespace PragueParking2._0.UI
                 if (spot.ParkedVehicles.Count > 0)
                 {
 
-                        var types = string.Join(" | ", spot.ParkedVehicles.Select(v => v.Type).Distinct());
-                        var regNumbers = string.Join(" | ", spot.ParkedVehicles.Select(v => v.RegNumber));
-                        var checkInTimes = string.Join(" | ", spot.ParkedVehicles.Select(v => v.CheckInTime.ToString("yyyy-MM-dd HH:mm")));
+                    var types = string.Join(" | ", spot.ParkedVehicles.Select(v => v.Type).Distinct());
+                    var regNumbers = string.Join(" | ", spot.ParkedVehicles.Select(v => v.RegNumber));
+                    var checkInTimes = string.Join(" | ", spot.ParkedVehicles.Select(v => v.CheckInTime.ToString("yyyy-MM-dd HH:mm")));
 
-                        var mcCount = spot.ParkedVehicles.Count(v => v is MC);
-                        var color = spot.ParkedVehicles.Any(v => v is Car) || mcCount == 2 ? "red" : "yellow";
-                        table.AddRow(
-                            spot.SpotNumber.ToString(),
-                            $"[{color}]{types}[/]",
-                            $"[{color}]{regNumbers.ToUpper()}[/]",
-                            $"[{color}]{checkInTimes}[/]");
-                    }
+                    var mcCount = spot.ParkedVehicles.Count(v => v is MC);
+                    var color = spot.ParkedVehicles.Any(v => v is Car) || mcCount == 2 ? "indianred1_1" : "yellow";
+                    table.AddRow(
+                        spot.SpotNumber.ToString(),
+                        $"[{color}]{types}[/]",
+                        $"[{color}]{regNumbers.ToUpper()}[/]",
+                        $"[{color}]{checkInTimes}[/]");
                 }
-         
+            }
+
             AnsiConsole.Write(table.Centered());
         }
         public Panel MiniMatrixPanel(Garage garage, Config config)
@@ -434,12 +463,12 @@ namespace PragueParking2._0.UI
                     if (spot.ParkedVehicles.Count == 0)
                     {
                         matrixBuilder.Append($"[palegreen3_1] {spot.SpotNumber:D2}[/] ");
-                        
+
                     }
                     else
                     {
                         var vehicle = spot.ParkedVehicles.First();
-                        var color = vehicle is Car ? "red" : "yellow";
+                        var color = vehicle is Car ? "indianred1_1" : "yellow";
                         matrixBuilder.Append($"[{color}] {spot.SpotNumber:D2}[/] ");
                         //rowCells.Add($"[{color}]{spot.SpotNumber}\n{vehicle.RegNumber.ToUpper()}[/]");
                     }
@@ -479,7 +508,7 @@ namespace PragueParking2._0.UI
                     else
                     {
                         var vehicle = spot.ParkedVehicles.First();
-                        var color = vehicle is Car ? "red" : "yellow";
+                        var color = vehicle is Car ? "indianred1_1" : "yellow";
                         matrixBuilder.Append($"[{color}]   {spot.SpotNumber:D2}[/]   ");
                         //rowCells.Add($"[{color}]{spot.SpotNumber}\n{vehicle.RegNumber.ToUpper()}[/]");
                     }
@@ -495,6 +524,16 @@ namespace PragueParking2._0.UI
 
             AnsiConsole.Write(new Align(panel, HorizontalAlignment.Center));
             AnsiConsole.MarkupLine("\n\n\tTryck på valfri tangent för att återgå till huvudmenyn...");
+            Console.ReadKey();
+        }
+        public void UpdatePriceList()
+        {
+            Config.SyncFromTextFile();
+            config = Config.Load(); // Laddar om filen från disk
+            AnsiConsole.MarkupLine($"[green]Priser uppdaterade från configfilen![/]");
+            AnsiConsole.MarkupLine($"Ny bilkostnad per timme: [yellow]{config.CarRatePerHour} kr[/]");
+            AnsiConsole.MarkupLine($"Ny MC-kostnad per timme: [yellow]{config.MCRatePerHour} kr[/]");
+            AnsiConsole.MarkupLine($"\nTryck på valfri tangent för att återgå till huvudmenyn...");
             Console.ReadKey();
         }
 
@@ -517,7 +556,7 @@ namespace PragueParking2._0.UI
             if (result)
                 AnsiConsole.MarkupLine($"[green]{message}[/]");
             else
-                AnsiConsole.MarkupLine($"[red]{message}[/]");
+                AnsiConsole.MarkupLine($"[indianred1_1]{message}[/]");
             AnsiConsole.MarkupLine("\nTryck på valfri tangent för att återgå till huvudmenyn...");
             Console.ReadKey();
         }
@@ -537,7 +576,7 @@ namespace PragueParking2._0.UI
                 {
                     foreach (var vehicle in spot.ParkedVehicles)
                     {
-                        var color = vehicle is Car ? "red" : "yellow";
+                        var color = vehicle is Car ? "indianred1_1" : "yellow";
                         parkedVehiclesRows.Add($"[{color}]Plats: {spot.SpotNumber}: " +
                             $" {vehicle.Type} " +
                             $" {vehicle.RegNumber.ToUpper()} " +
@@ -629,7 +668,7 @@ namespace PragueParking2._0.UI
                     var checkInTimes = string.Join(" | ", spot.ParkedVehicles.Select(v => v.CheckInTime.ToString("yyyy-MM-dd HH:mm")));
 
                     var mcCount = spot.ParkedVehicles.Count(v => v is MC);
-                    var color = spot.ParkedVehicles.Any(v => v is Car) || mcCount == 2 ? "red" : "yellow";
+                    var color = spot.ParkedVehicles.Any(v => v is Car) || mcCount == 2 ? "indianred1_1" : "yellow";
                     table.AddRow(
                         spot.SpotNumber.ToString(),
                         $"[{color}]{types}[/]",
