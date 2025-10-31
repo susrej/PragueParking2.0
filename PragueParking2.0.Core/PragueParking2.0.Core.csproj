@@ -1,20 +1,14 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <OutputType>Exe</OutputType>
     <TargetFramework>net9.0</TargetFramework>
-    <RootNamespace>PragueParking2._0</RootNamespace>
+    <RootNamespace>PragueParking2._0.Core</RootNamespace>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="Spectre.Console" Version="0.53.0" />
-    <PackageReference Include="Spectre.Console.ImageSharp" Version="0.53.0" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\PragueParking2.0.Core\PragueParking2.0.Core.csproj" />
   </ItemGroup>
 
 </Project>

@@ -1,12 +1,11 @@
-﻿using PragueParking2._0.DataAccess;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.Design;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PragueParking2._0.Models
+namespace PragueParking2._0.Core
 {
 
     public class ParkingSpot

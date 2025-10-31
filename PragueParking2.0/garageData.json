@@ -19,9 +19,9 @@
       "ParkedVehicles": [
         {
           "$type": "Car",
-          "RegNumber": "zun12w",
+          "RegNumber": "hij123",
           "Type": "Bil",
-          "CheckInTime": "2025-10-30T14:39:39.8983295+01:00",
+          "CheckInTime": "2025-10-31T16:14:07.8524759+01:00",
           "Size": 2
         }
       ]
@@ -55,15 +55,7 @@
     {
       "SpotNumber": 5,
       "MaxSize": 2,
-      "ParkedVehicles": [
-        {
-          "$type": "Car",
-          "RegNumber": "DDD",
-          "Type": "Bil",
-          "CheckInTime": "2025-10-30T15:25:20.6820334+01:00",
-          "Size": 2
-        }
-      ]
+      "ParkedVehicles": []
     },
     {
       "SpotNumber": 6,
@@ -94,7 +86,15 @@
     {
       "SpotNumber": 8,
       "MaxSize": 2,
-      "ParkedVehicles": []
+      "ParkedVehicles": [
+        {
+          "$type": "Car",
+          "RegNumber": "abc123",
+          "Type": "Bil",
+          "CheckInTime": "2025-10-31T08:36:14.0217139+01:00",
+          "Size": 2
+        }
+      ]
     },
     {
       "SpotNumber": 9,

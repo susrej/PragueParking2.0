@@ -1,16 +1,15 @@
-﻿using PragueParking2._0.Models;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Text.Json;
 
-namespace PragueParking2._0.DataAccess
+namespace PragueParking2._0.Core
 {
     public class Config
     {
-
+        //Textfil
         public static void SyncFromTextFile()
         {
             string textFile = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "../../../config.txt");

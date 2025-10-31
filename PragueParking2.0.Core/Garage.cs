@@ -1,6 +1,4 @@
-﻿using PragueParking2._0.DataAccess;
-using PragueParking2._0.Models;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.Design;
 using System.Linq;
@@ -11,7 +9,7 @@ using System.Text.Json;
 using System.Threading.Tasks;
 using System.Xml.Linq;
 
-namespace PragueParking2._0.Models
+namespace PragueParking2._0.Core
 {
     public class Garage
     {
@@ -61,7 +59,8 @@ namespace PragueParking2._0.Models
             return -1; //ingen plats ledig
 
         }
-
+        
+        //Flytta fordon
         public bool MoveVehicle(string regNumber, int targetSpotNumber, Config config, out string message)
         {
             Vehicle vehicleToMove = null;
@@ -108,6 +107,8 @@ namespace PragueParking2._0.Models
             message = $"Fordon {regNumber.ToUpper()} flyttad till plats {targetSpotNumber}.";
             return true;
         }
+        
+        //Checka ut fordon
         public string CheckOut(string regNumber, Config config)
         {
             Vehicle foundVehicle = null;

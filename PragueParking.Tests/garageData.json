@@ -8,15 +8,10 @@
           "$type": "Car",
           "RegNumber": "ABC123",
           "Type": "Bil",
-          "CheckInTime": "2025-10-29T14:36:49.8957141+01:00",
+          "CheckInTime": "2025-10-31T17:22:35.5632898+01:00",
           "Size": 2
         }
       ]
-    },
-    {
-      "SpotNumber": 2,
-      "MaxSize": 2,
-      "ParkedVehicles": []
     }
   ]
 }

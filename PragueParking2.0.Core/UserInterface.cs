@@ -5,12 +5,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using PragueParking2._0.DataAccess;
-using PragueParking2._0.Models;
 using System.Runtime.CompilerServices;
 
 
-namespace PragueParking2._0.UI
+namespace PragueParking2._0.Core
 {
     public class UserInterface
     {
@@ -48,6 +46,7 @@ namespace PragueParking2._0.UI
                 #endregion
                 #region UI Garage status
                 //Visa endast lediga platser i garaget
+                //TODO: ändra så att en halvtom plats också framgår
                 int availableSpots = garage.Spots.Count(spot => spot.ParkedVehicles.Count == 0);
                 var infoPanel = new Panel(
                     $"\n\nLediga platser: [palegreen3_1]{availableSpots}[/]\n\n")
@@ -76,7 +75,10 @@ namespace PragueParking2._0.UI
                 bool selected = false;
                 ConsoleKey key;
 
+  
                 var miniMatrixPanel = MiniMatrixPanel(garage, config);
+
+                #region Live-panel Huvudmeny
                 AnsiConsole.Live(new Columns(miniMatrixPanel, new Panel(""))).Start(ctx =>
                 {
                     while (!selected)
@@ -115,6 +117,8 @@ namespace PragueParking2._0.UI
                             selected = true;
                     }
                 });
+                #endregion
+
 
                 #region Switch case för menyval
                 var selectedChoice = menuChoices[selectedIndex];
@@ -233,7 +237,6 @@ namespace PragueParking2._0.UI
 
                         }));
 
-
                     Vehicle vehicle = menuChoices[selectedIndex] == "Registrera bil" ? new Car(regNumber) : new MC(regNumber);
 
                     int spotNumber = garage.ParkVehicle(vehicle, config); //få platsnummer på parkeringen
@@ -256,7 +259,6 @@ namespace PragueParking2._0.UI
                     break;
             }
         }
-
         public void MoveVehicleMenuUI()
         {
             AnsiConsole.Clear();
@@ -328,7 +330,6 @@ namespace PragueParking2._0.UI
                     break;
             }
         }
-
         public void CheckOutMenuUI()
         {
             AnsiConsole.Clear();
@@ -412,7 +413,6 @@ namespace PragueParking2._0.UI
                     break;
             }
         }
-
         public void ShowOnlyParkedVehicles(Garage garage)
         {
             AnsiConsole.Clear();

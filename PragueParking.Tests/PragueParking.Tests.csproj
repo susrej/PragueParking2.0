@@ -2,7 +2,6 @@
 
   <PropertyGroup>
     <TargetFramework>net9.0</TargetFramework>
-    <RootNamespace>PragueParking2._0.Tests</RootNamespace>
     <LangVersion>latest</LangVersion>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
@@ -11,10 +10,10 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.12.0" />
     <PackageReference Include="MSTest" Version="3.6.4" />
-    <PackageReference Include="Spectre.Console.ImageSharp" Version="0.53.0" />
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\PragueParking2.0.Core\PragueParking2.0.Core.csproj" />
     <ProjectReference Include="..\PragueParking2.0\PragueParking2.0.csproj" />
   </ItemGroup>
 

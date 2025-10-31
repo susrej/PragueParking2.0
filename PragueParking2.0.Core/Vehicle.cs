@@ -6,7 +6,7 @@ using System.Text;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
-namespace PragueParking2._0.Models
+namespace PragueParking2._0.Core
 {
     [JsonDerivedType(typeof(Car), typeDiscriminator: "Car")] // Tala om för JSON att "Car" är en möjlig typ
     [JsonDerivedType(typeof(MC), typeDiscriminator: "MC")]   // Tala om för JSON att "MC" är en möjlig typ

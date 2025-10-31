@@ -1,6 +1,5 @@
-﻿using PragueParking2._0.DataAccess;
-using PragueParking2._0.Models;
-
+﻿using PragueParking2._0.Core;
+using PragueParking2._0;
 namespace PragueParking2._0.Tests
 {
     [TestClass]
@@ -23,7 +22,7 @@ namespace PragueParking2._0.Tests
             //Assert
             Assert.AreEqual(-1, result, "Parkeringsplatsen är full, borde returnera -1.");
         }
-        
+
         [TestMethod]
         public void IsAvailable_ShouldReturnFalseWhenCarIsParked()
         {
@@ -39,5 +38,6 @@ namespace PragueParking2._0.Tests
             //Assert
             Assert.IsFalse(isAvailable, "Parkeringsplatsen har redan en bil, borde returnera false för MC.");
         }
+
     }
 }

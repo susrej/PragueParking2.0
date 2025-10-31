@@ -4,9 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
-using PragueParking2._0.Models;
 
-namespace PragueParking2._0.DataAccess
+namespace PragueParking2._0.Core
 {
     public class GarageData
 
